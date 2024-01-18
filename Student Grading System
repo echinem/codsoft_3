@@ -1,0 +1,61 @@
+#include<iostream>
+#include<string>
+#include<vector>
+#include<algorithm>
+using namespace std;
+
+struct Student{
+    string fName;
+    string lName;
+    int Grade;
+};
+
+int main(){
+    vector<Student> students;
+    int grade;
+    string fname, lname;
+    char choice;
+    
+    do{
+        cout << "Enter First Name: ";
+        cin >> fname;
+        cout << "Enter Last Name: ";
+        cin >> lname;
+        cout << "Enter Grade: ";
+        cin >> grade;
+
+        students.push_back({fname, lname, grade});
+
+        cout << "\n\n Enter 'Y' to enter another student's details\n OR\n Enter any other character to stop: \n ";
+        cin >> choice;
+        cout << endl;
+    } while (choice == 'y' || choice == 'Y');
+
+    float avg = 0;
+    int high, low;
+    high = students[0].Grade;
+    low = students[0].Grade;
+    string HighestGrade = students[0].fName + " " + students[0].lName;
+    string LowestGrade = students[0].fName + " " + students[0].lName;
+
+    for (int i = 0; i < students.size(); i++) {
+        avg += students[i].Grade;
+
+        if (students[i].Grade > high) {
+            high = students[i].Grade;
+            HighestGrade = students[i].fName + " " + students[i].lName;
+        }
+
+        if (students[i].Grade < low) {
+            low = students[i].Grade;
+            LowestGrade = students[i].fName + " " + students[i].lName;
+        }
+    }
+    avg = avg / students.size();
+
+    cout << "\nAverage grade: " << avg << endl<<endl;
+    cout << "Highest Grade: " << high << " ( "<< HighestGrade <<" )"<< endl <<endl;
+    cout << "Lowest Grade: " << low << " ( "<< LowestGrade <<" )" << endl <<endl;
+
+    return 0;
+}
